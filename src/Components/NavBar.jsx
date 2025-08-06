@@ -1,12 +1,11 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 function NavBar() {
 	return (
-		<nav >
-			<ul className="flex justify-between items-center p-4 bg-blue-500 text-white">
-				<li><a href="/">Home</a></li>
-				<li><a href="/about">About</a></li>
-				<li><a href="/contact">Contact</a></li>
-			</ul>
+		<nav className="flex justify-between items-center p-4 bg-blue-500 text-white">
+				<Link to="/">Home</Link>
+				<Link to="/about">About</Link>
+				<Link to="/contact">Contact</Link>
 		</nav>
 	);
 }
