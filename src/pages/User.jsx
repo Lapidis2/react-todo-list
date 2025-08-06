@@ -43,11 +43,11 @@ function User() {
 					?
 					userData.map((user) => (
 
-						<div key={user.id} className="grid grid-cols-1 p-4 bg-white shadow-md rounded-lg mb-4 md:grid-cols-2 lg:grid-cols-3">
-							<h2 className="text-xl font-bold">{user.name}</h2>
-							<p>Email: {user.email}</p>
-							<p>Phone: {user.phone}</p>
-							<p>Website: {user.website}</p>
+						<div key={user.id} className="grid grid-cols-1 p-4 bg-white shadow-md rounded-lg  m-4 mb-4 md:grid-cols-2 lg:grid-cols-3">
+							<div className="text-xl font-bold">{user.name}</div>
+							<div>Email: {user.email}</div>
+							<div>Phone: {user.phone}</div>
+							<div>Website: {user.website}</div>
 						</div>
 
 					))
