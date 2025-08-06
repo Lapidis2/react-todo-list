@@ -21,17 +21,17 @@ function User() {
 
 			}
 			catch (error) {
-			console.error('Error fetching user data:', error);
-			setUserData([]);
-			setLoading(false);
-			}
-			finally{
+				console.error('Error fetching user data:', error);
+				setUserData([]);
 				setLoading(false);
 			}
-					}
+			finally {
+				setLoading(false);
+			}
+		}
 		fetchUserData();
 	}, []);
-if (loading) {
+	if (loading) {
 		return <div>Loading...</div>;
 	}
 
@@ -40,18 +40,18 @@ if (loading) {
 		<div>
 			{
 				userData.length > 0
-					? 
-						userData.map((user) => (
+					?
+					userData.map((user) => (
 
-							<div key={user.id} className="p-4 border-b">
-								<h2 className="text-xl font-bold">{user.name}</h2>
-								<p>Email: {user.email}</p>
-								<p>Phone: {user.phone}</p>
-								<p>Website: {user.website}</p>
-							</div>
+						<div key={user.id} className="grid grid-cols-1 p-4 bg-white shadow-md rounded-lg mb-4 md:grid-cols-2 lg:grid-cols-3">
+							<h2 className="text-xl font-bold">{user.name}</h2>
+							<p>Email: {user.email}</p>
+							<p>Phone: {user.phone}</p>
+							<p>Website: {user.website}</p>
+						</div>
 
-						))
-					
+					))
+
 					: (<h1>No user found</h1>)
 			}
 		</div>
