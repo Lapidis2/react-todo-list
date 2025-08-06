@@ -8,6 +8,7 @@ import About from './pages/About'
 import NavBar from './Components/NavBar'
 import Contact from './pages/Contact'
 import User from './pages/User'
+import UserDetail from './Components/userDetail.jsx'
 function App() {
 
 	return (
@@ -18,6 +19,7 @@ function App() {
 				<Route path={'/about'} element={<About />} />
 				<Route path={'/contact'} element={<Contact />} />
 				<Route path={'/user'} element={<User/>} />
+				<Route path={'/user/:id'} element={<UserDetail/>} />
 			</Routes>
 		</Router>
 

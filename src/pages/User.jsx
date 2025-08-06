@@ -1,62 +1,51 @@
-import React from 'react'
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import UserCard from "../Components/uUerCard.jsx"; 
+
 function User() {
+  const [userData, setUserData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-	const [userData, setUserData] = useState(null);
-	const [loading, setLoading] = useState(true);
-	useEffect(() => {
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users`);
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        setUserData(data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setUserData([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUserData();
+  }, []);
 
-		const fetchUserData = async () => {
+  if (loading) return <div>Loading...</div>;
 
-			try {
-				const response = await fetch(`https://jsonplaceholder.typicode.com/users`);
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				const data = await response.json()
-				console.log(data);
-				setUserData(data || []);
-				setLoading(false);
-
-			}
-			catch (error) {
-				console.error('Error fetching user data:', error);
-				setUserData([]);
-				setLoading(false);
-			}
-			finally {
-				setLoading(false);
-			}
-		}
-		fetchUserData();
-	}, []);
-	if (loading) {
-		return <div>Loading...</div>;
-	}
-
-	return (
-
-		<div>
-			{
-				userData.length > 0
-					?
-					userData.map((user) => (
-
-						<div key={user.id} className="grid grid-cols-1 p-4 bg-white shadow-md rounded-lg  m-4 mb-4 md:grid-cols-2 lg:grid-cols-3">
-							<div className="text-xl font-bold">{user.name}</div>
-							<div>Email: {user.email}</div>
-							<div>Phone: {user.phone}</div>
-							<div>Website: {user.website}</div>
-						</div>
-
-					))
-
-					: (<h1>No user found</h1>)
-			}
-		</div>
-
-	)
+  return (
+    <div>
+      {userData.length > 0 ? (
+        userData.map((user) => (
+          <Link to={`/user/${user.id}`} key={user.id} className="block">
+            <UserCard
+              id={user.id}
+              name={user.name}
+              email={user.email}
+              phone={user.phone}
+              website={user.website}
+              address={user.address}
+              company={user.company}
+            />
+          </Link>
+        ))
+      ) : (
+        <h1>No users found</h1>
+      )}
+    </div>
+  );
 }
 
-export default User
+export default User;
